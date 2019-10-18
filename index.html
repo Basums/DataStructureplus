@@ -6,24 +6,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		
 		<title>校园最短路径漫游</title>
 		<!--
  			作者：yuyifengfei@126.com
         	时间：2019-09-29
         	描述：引入Reset.css用来清除浏览器的样式
         -->
-		<link rel="stylesheet" type="text/css" href="css/Reset.css" />
+		<link rel="stylesheet" href="css/Reset.css" />
 		<!--
         	描述：引入我编写的样式Page-layoutplus.css
         -->		
-		<link rel="stylesheet" type="text/css" href="css/Page-layout_plus.css" />
+		<link rel="stylesheet" href="css/Page-layout_plus.css" />
 		<script src="https://webapi.amap.com/maps?v=1.4.15&key=6b38bc6950b58828a561ef015e59c352=init"></script>
 	</head>
 	
 	<!--布局核心部分-->
 	<body id="body">
-		<img  class="banner" src="img/background.jpg" />
+		<!--网页整体背景-->
+		<img  class="banner" src="img/background.jpg" style="-webkit-filter: blur(4px); opacity: 3;"/>
 		<div class="body_child">
 				<!--
 		        	描述：第一个容器，编写网页页眉部分
@@ -42,62 +44,77 @@
 						<li>
 							<a href="requirement.html" target="_blank">项目要求</a>
 						</li>
-						<li>
-							<!--这里可以存放百度网盘的连接入口-->
-							<a href="#" onclick="alert('这里打算放百度网盘的链接')">项目报告</a>
-						</li>
+					</ul>
+					<ul class="nav">
+						<h1>校园最短路径漫游</h1>
 					</ul>
 				</div>
-				
 				<!--
-		        	描述：第二个容器，存放标题
+		        	描述：全屏按钮
 		        -->
 		        <div class="content">
-		        	<h1>校园最短路径漫游</h1>
 		        	<button id="btn" type="button" class="btn3">Hello Basums</button>
 		        </div>
 		        <!--
-                	描述：第三个容器存放API
+                	描述：调用高德API
                 -->
-		        <div id="container" class="container"></div>
-		       	<!-- 加载地图JSAPI脚本 -->
-			   
+		        <div id="container" class="container">
+		        	<!--描述：地图突出输入框-->
+		        	<div id="div0" class="destination" style="float: right;">
+						<h2>路径搜索</h2>
+																	<!--placeholder水印-->
+							<div class="input">  
+								<p>起点：<input id="txt1" type="text" placeholder="请输入起点"/></p>
+								<p>终点：<input id="txt2" type="text" placeholder="请输入终点"/></p>
+		
+							</div>
+							<div>
+								<p>选择出行方式：</p>
+								<input id="btn1" type="button" class="btn" value="步行" ></input>
+								<input id="btn2" type="button" class="btn" value="骑行"></input>
+							</div>
+							<div id="div1">
+								<p>您的最短路线为：
+								<h5 id="line"></h5>
+								</p>
+								<p>路线总长度：
+								<h5 id="weigh"></h5>
+								</p>
+								<p>所需时间为：
+								<h5 id="time"></h5>
+								</p>
+							</div>
+						</div>
+						<script type="text/javascript" src="js/A_matrix.js" ></script>
+						<script type="text/javascript" src="js/Floyd.js" ></script>
+						<script type="text/javascript" src="js/lineview.js" ></script>
+						<script type="text/javascript" src="js/Shieldings.js" ></script>
+		        </div>
+		       	<!-- 加载地图JSAPI脚本 -->		        
 				<script type="text/javascript" src="js/API1.js" ></script>
-				
+				<script type="text/javascript" src="js/fuzzy_search.js" ></script>
 				<!--
-                	描述：第四个容器，存放输入显示框
+                	描述：运动框架部分，隐藏显示
                 -->
-				<div id="div0" class="destination">
-				<h2>路径搜索</h2>
-															<!--placeholder水印-->
-					<div class="input">  
-						<p>起点：<input id="txt1" type="text" placeholder="请输入起点"/></p>
-						<p>终点：<input id="txt2" type="text" placeholder="请输入终点"/></p>
-
-					</div>
-					<div>
-						<p>选择出行方式：</p>
-						<input id="btn1" type="button" class="btn" value="步行" ></input>
-						<input id="btn2" type="button" class="btn" value="骑行"></input>
-					</div>
-					<div id="div1">
-						<p>您的最短路线为：
-						<h5 id="line"></h5>
-						</p>
-						<p>路线总长度：
-						<h5 id="weigh"></h5>
-						</p>
-						<p>所需时间为：
-						<h5 id="time"></h5>
-						</p>
-					</div>
-				</div>
-				<script type="text/javascript" src="js/Floyd.js" ></script>
-				<script type="text/javascript" src="js/lineview.js" ></script>
-				<script type="text/javascript" src="js/Shieldings.js" ></script>
-				<!--
-                	描述：最后一个容器，说明注释
-                -->
+                <div class="Partition_check_box" id="Partition_check_box">
+                	<input id="btn4" type="button" class="btn4" value=">>"></input>
+            		<div class="Partition_full" id="Partition_full" style="display: none;text-align: center;"></br></br>
+						<input id="trabtn_show" type="button" class="btn5" value="显示路况信息" style="display: none;"/></br></br>
+						<input id="trabtn_unshow" type="button" class="btn5" value="关闭路况信息" style="display: none;"/></br></br>
+	            		<ul class="nav2">
+							<li>
+								拥挤时间段：<a id="iscrowded"></a>
+							</li>
+							<li>
+								北京时间:<a id="clock"></a>
+							</li>
+	            		</ul>
+            		</div>
+                </div>
+                <script type="text/javascript" src="js/Time.js" ></script>                
+                <script type="text/javascript" src="js/partition.js" ></script>
+                <script type="text/javascript" src="js/startmove.js" ></script>
+               	<!--尾部注释-->
 				<div class="annotation">
 					<ul>
 						<li class="li1">
