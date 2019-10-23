@@ -1,5 +1,5 @@
 /*这是一些取消默认行为的描述*/
-/*document.oncontextmenu=function(){
+document.oncontextmenu=function(){
 	
 	var arr_alert=new Array();
 	arr_alert=["欢迎进入校园最短路径项目，保护代码，从我做起","本项目采用HTML+CSS+Javascript","代码仅存在本地","再次确定即可退出右键菜单","哈哈，骗你的","再试一次","( •̀ ω •́ )y还是不行","算了不逗你了，再点一次退出"];
@@ -9,7 +9,7 @@
 	}
 	return false;
 }
-*/	
+	
 /*全屏预览*/
 function fullScreen(el) {
     var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen,
