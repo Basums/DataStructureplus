@@ -203,7 +203,7 @@
 				oLine.innerHTML = b;	
 			}
 			oWeigh.innerHTML = c+"米";
-		oTime.innerHTML = "步行用时"+parseInt(c/80)+"分钟,"+Math.round((c/80-parseInt(c/80))*60 +Iscrowded_counter*4)+"秒";
+		oTime.innerHTML = "步行用时"+parseInt(c/70+traffic_couter*20/60)+"分钟,"+Math.round((c/70+ traffic_couter*20/60-parseInt(c/70+traffic_couter*20/60))*60 +Iscrowded_counter*4)+"秒";
 		polyline();	
 		}else if((flag1==1)&&(flag2==0)){
 			alert("步行模式，起点格式正确，请重新检查终点");
@@ -224,7 +224,7 @@
 				oLine.innerHTML = b;	
 			}
 			oWeigh.innerHTML = c+"米";
-			oTime.innerHTML = "骑行用时"+parseInt(c/300)+"分钟,"+Math.round((c/300-parseInt(c/300))*60+Iscrowded_counter*2)+"秒";
+			oTime.innerHTML = "骑行用时"+parseInt(c/210+ traffic_couter*30/60)+"分钟,"+Math.round((c/210+ traffic_couter*30/60-parseInt(c/210+ traffic_couter*30/60))*60+Iscrowded_counter*2)+"秒";
 			polyline();	
 		}else if((flag1==1)&&(flag2==0)){
 			alert("骑行模式，起点格式正确，请重新检查终点");
@@ -252,6 +252,3 @@
 			Iscrowded_counter=0;
 		}
 	}
-
-
-		
