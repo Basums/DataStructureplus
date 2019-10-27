@@ -7,7 +7,6 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-		
 		<title>校园最短路径漫游</title>
 		<!--
  			作者：yuyifengfei@126.com
@@ -27,77 +26,107 @@
 		<!--网页整体背景-->
 		<img  class="banner" src="img/background.jpg" style="-webkit-filter: blur(4px); opacity: 3;"/>
 		<div class="body_child">
-				<!--
-		        	描述：第一个容器，编写网页页眉部分
-		       -->
-				<div id="div1_head" class="div1_head">
-					<div id="head_logo" class="hend_logo">
-						<img class="logo" src="img/logo.jpg" alt="Basums网站的logo" onclick="window.location.reload()"/>
-					</div>
-					<!--
-						建立导航条
-					-->
-					<ul class="nav">
-						<li>
-							<a href="http://202.121.199.224/teacher/" target="_blank">项目中心网站</a>
-						</li>
-						<li>
-							<a href="requirement.html" target="_blank">项目要求</a>
-						</li>
-					</ul>
-					<ul class="nav">
-						<h1>校园最短路径漫游</h1>
-					</ul>
+			<!--
+	        	描述：第一个容器，编写网页页眉部分
+	       -->
+			<div id="div1_head" class="div1_head">
+				<div id="head_logo" class="hend_logo">
+					<img class="logo" src="img/logo.jpg" alt="Basums网站的logo" onclick="window.location.reload()"/>
 				</div>
 				<!--
-		        	描述：全屏按钮
-		        -->
-		        <div class="content">
-		        	<button id="btn" type="button" class="btn3">Hello Basums</button>
-		        </div>
-		        <!--
-                	描述：调用高德API
-                -->
-		        <div id="container" class="container">
-		        	<!--描述：地图突出输入框-->
-		        	<div id="div0" class="destination" style="float: right;">
+					建立导航条
+				-->
+				<ul class="nav">
+					<li>
+						<a href="http://202.121.199.224/teacher/" target="_blank">项目中心网站</a>
+					</li>
+					<li>
+						<a href="requirement.html" target="_blank">项目要求</a>
+					</li>
+				</ul>
+				<ul class="nav">
+					<h1>校园最短路径漫游</h1>
+				</ul>
+			</div>
+			<!--
+	        	描述：全屏按钮
+	        -->
+	        <div class="content">
+	        	<button id="btn" type="button" class="btn3">Hello Basums</button>
+	        </div>
+	        <!--
+            	描述：调用高德API
+            -->
+	        <div id="container" class="container">
+	        	<!--描述：地图突出输入框-->
+	        	<div id="div0" class="destination" style="float: right;opacity: 0;" onmousemove="ODiv0.style.opacity='0.9'" onmouseout="ODiv0.style.opacity='0'">
+	        		<div>
+	        			<input id="btn_path" type="button" class="btn5" value="path" title="点击即可显示输入区域"></input>
+	        			<input id="btn_search" type="button" class="btn5" value="search"  style="margin-left: 120px;"></input>
+	        		</div>
+					<div id="path" style="margin-top: 30px;display: none;">
 						<h2>路径搜索</h2>
-																	<!--placeholder水印-->
-							<div class="input">  
-								<p>起点：<input id="txt1" type="text" placeholder="请输入起点"/></p>
-								<p>终点：<input id="txt2" type="text" placeholder="请输入终点"/></p>
-		
+																<!--placeholder水印-->
+						<div class="input">  
+							<p>起点：<input id="txt1" type="text" placeholder="请输入起点" style="padding-left: 5px;"/></p>
+							<p>终点：<input id="txt2" type="text" placeholder="请输入终点" style="padding-left: 5px;"/></p>
+	
+						</div>
+						<div>
+							<p>选择出行方式：</p>
+							<input id="btn1" type="button" class="btn" value="步行" ></input>
+							<input id="btn2" type="button" class="btn" value="骑行"></input>
+						</div>
+						<div id="div1">
+							<p>您的最短路线为：
+							<h5 id="line"></h5>
+							</p>
+							<p>路线总长度：
+							<h5 id="weigh"></h5>
+							</p>
+							<p>所需时间为：
+							<h5 id="time"></h5>
+							</p>
+						</div>
+					</div>	
+					<div id="fuzzy_searchbox" style="display: none;">
+						<div id="app" style="margin-top: 40px;">
+							<a style="font-size: 16px;color: #11719E;padding-bottom:10px;border-bottom: 2px dotted beige;">请输入你想查询的:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							<div style="margin-top: 20px;">
+								<el-row type="flex" justify="left">
+								    <el-col :span="20">
+									  	<div class="grid-content bg-purple" >
+											 <el-input v-model="searchText" placeholder="edit me" type="input" class="dialog-input-text"></el-input>
+									  	</div>
+								    </el-col>
+								</el-row>
 							</div>
-							<div>
-								<p>选择出行方式：</p>
-								<input id="btn1" type="button" class="btn" value="步行" ></input>
-								<input id="btn2" type="button" class="btn" value="骑行"></input>
-							</div>
-							<div id="div1">
-								<p>您的最短路线为：
-								<h5 id="line"></h5>
-								</p>
-								<p>路线总长度：
-								<h5 id="weigh"></h5>
-								</p>
-								<p>所需时间为：
-								<h5 id="time"></h5>
-								</p>
+							<div style="width:270px;margin:10px auto;text-align: center;background:inherit;">
+								<p style="text-align: left;font-size: 13px;color: #11719E;" v-if="searchText">查询&nbsp;" <span style="color:#FF0000;font-size: 14px;" id="searchText" >{{searchText}}</span>"&nbsp;的结果:&nbsp;({{result.length}})</p>
+								<ol style="text-align: left;">
+									<li style="margin-bottom:5px;font-size: 13px;" v-for="item in result">{{item.b}}({{item.a}})</li>
+								</ol>
 							</div>
 						</div>
-						<script type="text/javascript" src="js/A_matrix.js" ></script>
-						<script type="text/javascript" src="js/Floyd.js" ></script>
-						<script type="text/javascript" src="js/lineview.js" ></script>
-						<script type="text/javascript" src="js/Shieldings.js" ></script>
-		        </div>
-		       	<!-- 加载地图JSAPI脚本 -->		        
-				<script type="text/javascript" src="js/API1.js" ></script>
-				<script type="text/javascript" src="js/fuzzy_search.js" ></script>
-				<!--
-                	描述：运动框架部分，隐藏显示
-                -->
-                <div class="Partition_check_box" id="Partition_check_box">
-                	<input id="btn4" type="button" class="btn4" value=">>"></input>
+                	</div>
+				<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+				<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+				<script src="https://unpkg.com/element-ui/lib/index.js"></script>  
+				<script type="text/javascript" src="js/vue.js" ></script>
+				</div>
+					<script type="text/javascript" src="js/A_matrix.js" ></script>
+					<script type="text/javascript" src="js/Floyd.js" ></script>
+					<script type="text/javascript" src="js/lineview.js" ></script>
+					<script type="text/javascript" src="js/Shieldings.js" ></script>
+	        </div>
+	       	<!-- 加载地图JSAPI脚本 -->		        
+			<script type="text/javascript" src="js/API1.js" ></script>
+			<script type="text/javascript" src="js/fuzzy_search.js" ></script>
+			<!--
+            	描述：运动框架部分，隐藏显示
+            -->
+            <div class="Partition_check_box" id="Partition_check_box">
+            	<input id="btn4" type="button" class="btn4" value=">>"></input>
             		<div class="Partition_full" id="Partition_full" style="display: none;text-align: center;"></br></br>
 						<input id="trabtn_show" type="button" class="btn5" value="显示路况信息" style="display: none;"/></br></br>
 						<input id="trabtn_unshow" type="button" class="btn5" value="关闭路况信息" style="display: none;"/></br></br>
@@ -113,7 +142,11 @@
                 </div>
                 <script type="text/javascript" src="js/Time.js" ></script>                
                 <script type="text/javascript" src="js/partition.js" ></script>
-                <script type="text/javascript" src="js/startmove.js" ></script>
+                <script type="text/javascript" src="js/startmove.js" ></script>   
+				<!--
+                	描述：双运动框架部分，隐藏显示
+                -->
+ 
                	<!--尾部注释-->
 				<div class="annotation">
 					<ul>
@@ -128,6 +161,6 @@
 						</li>
 					</ul>
 				</div>
-		  </div>
+		 </div>
 	</body>
 </html>
