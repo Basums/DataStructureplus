@@ -780,6 +780,8 @@ for(i=0;i<50;i++){
 	Arr2[270][273] = 40;
 	Arr2[100][131] = 50;
 	
+	Arr2[197][202] = 65535;
+
 for(i = 0;i<numVertexes;i++){
 	for(j = i + 1;j<numVertexes;j++){
 		Arr2[j][i] = Arr2[i][j];
