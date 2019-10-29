@@ -31,7 +31,9 @@ var mark_display_flag;
 var map = new AMap.Map('container', {
     resizeEnable: true, //是否监控地图容器尺寸变化
     zoom:16, //初始化地图层级
-    center: [121.393401,31.315957] //初始化地图中心点
+    center: [121.393401,31.315957], //初始化地图中心点
+    pitch:50, // 地图俯仰角度，有效范围 0 度- 83 度
+    viewMode:'3D' // 地图模式	
 });
 var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});	 
 window.setTimeout(map.clearMap(),500);
@@ -86,3 +88,11 @@ function Showspecial_one(){
         map.setFitView();
 	}
 };
+AMap.plugin('AMap.ToolBar',function(){//异步加载插件
+        var toolbar = new AMap.ToolBar();
+        map.addControl(toolbar);
+    });
+AMap.plugin('AMap.Scale',function(){//异步加载插件
+    var toolbar2 = new AMap.Scale();
+    map.addControl(toolbar2);
+});
